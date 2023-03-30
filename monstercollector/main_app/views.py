@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Monster
 
 # Create your views here.
@@ -17,3 +18,15 @@ def monsters_index(request):
 def monsters_detail(request, monster_id):
     monster = Monster.objects.get(id=monster_id)
     return render(request, 'monsters/detail.html', { 'monster': monster })
+
+class MonsterCreate(CreateView):
+    model = Monster
+    fields = '__all__'
+
+class MonsterUpdate(UpdateView):
+    model = Monster
+    fields = ['type', 'size', 'alignment', 'armor_class']
+
+class MonsterDelete(DeleteView):
+    model = Monster
+    success_url = '/monsters'
