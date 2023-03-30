@@ -1,9 +1,5 @@
 from django.shortcuts import render
-
-monsters = [
-    {'name': 'Aartuk Elder', 'type': 'Plant', 'size': 'Large', 'alignment': 'Typically Lawful Evil'},
-    {'name': 'Adult Blue Dracolich', 'type': 'Undead', 'size': 'Huge', 'alignment': 'Lawful Evil'},
-]
+from .models import Monster
 
 # Create your views here.
 def home(request):
@@ -13,6 +9,11 @@ def about(request):
     return render(request, 'about.html')
 
 def monsters_index(request):
+    monsters = Monster.objects.all()
     return render(request, 'monsters/index.html', {
         'monsters': monsters
     })
+
+def monsters_detail(request, monster_id):
+    monster = Monster.objects.get(id=monster_id)
+    return render(request, 'monsters/detail.html', { 'monster': monster })
