@@ -14,3 +14,12 @@ class Monster(models.Model):
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'monster_id': self.id})
+    
+class Loot(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+
+    monster = models.ForeignKey(Monster, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.monster} hoards {self.name}"
