@@ -11,6 +11,7 @@
                 <p>Size: {{ monster.size }}</p>
                 <p>Alignment: {{ monster.alignment }}</p>
                 <p>Armor Class: {{ monster.armor_class }}</p>
+                <p>Description: {{ monster.description }}</p>
             </div>
             <div class="card-action">
                 <a href="{% url 'monsters_update' monster.id %}">Edit</a>
@@ -43,7 +44,26 @@
         </table>
     </div>
 
+</div>
 
+<hr>
+<div class="row">
+    <div class="col s6">
+        <h3>Places where {{ monster.name }} might be</h3>
+        {% if monster.dungeons.count %}
+        {% for dungeon in monster.dungeons.all %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                    {{ dungeon.name }}
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h5>No Dungeons 🏰</h5>
+        {% endif %}
+    </div>
 </div>
 
 {% endblock %}
