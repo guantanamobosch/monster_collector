@@ -2,12 +2,22 @@ from django.db import models
 from django.urls import reverse
 
 # Create your models here.
+class Dungeon(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
 class Monster(models.Model):
     name = models.CharField(max_length=100, default='unknown')
     type = models.CharField(max_length=50, default='unknown')
     size = models.CharField(max_length=10, default='unknown')
     alignment = models.CharField(max_length=50, default='unknown')
+    description = models.TextField(default='unknown')
     armor_class = models.IntegerField()
+    dungeons = models.ManyToManyField(Dungeon)
 
     def __str__(self):
         return self.name
