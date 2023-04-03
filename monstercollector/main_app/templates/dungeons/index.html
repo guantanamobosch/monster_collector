@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Dungeon List</h1>
+
+{% for dungeon in dungeons %}
+<div class="card">
+    <a href="{% url 'detail' dungeon.id %}">
+        <div class="card-content">
+            <span class="card-title">{{ dungeon.name }}</span>
+            <p>Type: {{ dungeon.type }}</p>
+            <p>Size: {{ dungeon.size }}</p>
+            <p>Alignment: {{ dungeon.alignment }}</p>
+        </div>
+    </a>
+</div>
+{% endfor %}
+
+{% endblock %}

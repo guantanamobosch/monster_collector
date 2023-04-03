@@ -16,6 +16,12 @@ def monsters_index(request):
         'monsters': monsters
     })
 
+def dungeons_index(request):
+    dungeons = Dungeon.objects.all()
+    return render(request, 'dungeons/index.html', {
+        'dungeons': dungeons
+    })
+
 def monsters_detail(request, monster_id):
     monster = Monster.objects.get(id=monster_id)
     id_list = monster.dungeons.all().values_list('id')
@@ -30,6 +36,10 @@ def add_loot(request, monster_id):
         new_loot.monster_id = monster_id
         new_loot.save()
     return redirect('detail', monster_id=monster_id)
+
+class DungeonCreate(CreateView):
+    model = Dungeon
+    fields = '__all__'
 
 class MonsterCreate(CreateView):
     model = Monster
