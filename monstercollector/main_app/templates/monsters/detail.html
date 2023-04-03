@@ -64,6 +64,30 @@
         <h5>No Dungeons 🏰</h5>
         {% endif %}
     </div>
+
+
+    <div class="col s6">
+        <h3>Other Places</h3>
+        {% if dungeons.count %}
+        {% for dungeon in dungeons.all %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                    {{ dungeon.name }}
+                </span>
+            </div>
+            <div class="card-action">
+                <form action="{% url 'assoc_dungeon' monster.id dungeon.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Add</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h5>{{ monster.name }} is Already Found Everywhere</h5>
+        {% endif %}
+    </div>
 </div>
 
 {% endblock %}
