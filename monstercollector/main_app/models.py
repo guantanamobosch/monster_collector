@@ -8,6 +8,9 @@ class Dungeon(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('dungeons_detail', kwargs={'dungeon_id': self.id})
 
 
 class Monster(models.Model):

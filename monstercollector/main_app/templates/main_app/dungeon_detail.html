@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">{{ dungeon.name }}</span>
+        <p>{{ dungeon.description }}</p>
+    </div>
+    <div class="card-action">
+        <a href="{% url 'dungeons_update' dungeon.id %}">Edit</a>
+        <a href="{% url 'dungeons_delete' dungeon.id %}">Delete</a>
+    </div>
+</div>
+
+{% endblock %}

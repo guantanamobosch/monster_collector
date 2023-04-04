@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView
 from .models import Monster, Dungeon
 from .forms import LootForm
 
@@ -37,9 +38,20 @@ def add_loot(request, monster_id):
         new_loot.save()
     return redirect('detail', monster_id=monster_id)
 
+class DungeonDetail(DetailView):
+    model = Dungeon
+    
 class DungeonCreate(CreateView):
     model = Dungeon
     fields = '__all__'
+
+class DungeonUpdate(UpdateView):
+    model = Dungeon
+    fields = ['name', 'description']
+
+class DungeonDelete(DeleteView):
+    model = Dungeon
+    success_url = '/dungeons'
 
 class MonsterCreate(CreateView):
     model = Monster
